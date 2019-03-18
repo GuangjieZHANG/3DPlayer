@@ -59,8 +59,8 @@ public class MainActivity extends AppCompatActivity {
         selectVideo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this,FileExplorerActivity.class);
-                MainActivity.this.startActivity(intent);
+           /*     Intent intent = new Intent(MainActivity.this,FileExplorerActivity.class);
+                MainActivity.this.startActivity(intent);*/
             }
         });
     }

@@ -2,12 +2,10 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
     <ListView android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/filelist_list"
         android:dividerHeight="1dip"
         android:cacheColorHint="@android:color/transparent"
         ></ListView>
-
 </RelativeLayout>

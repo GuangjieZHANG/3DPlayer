@@ -65,10 +65,18 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         db.execSQL(createTable);
         String insertTest1 = "INSERT INTO VIDEO(NAME,ROUTE,ISLIKED) VALUES('1520504659755.mp4','/storage/tencent/MicroMsg/WeiXin/1520504659755.mp4',0)";
         db.execSQL(insertTest1);
-/*        String insertTest2 = "INSERT INTO VIDEO(NAME,ROUTE,ISLIKED) VALUES('1520889262466.mp4','/tencent/MicroMsg/WeiXin/1520889262466.mp4',0)";
+        String insertTest2 = "INSERT INTO VIDEO(NAME,ROUTE,ISLIKED) VALUES('1520889262466.mp4','/tencent/MicroMsg/WeiXin/1520889262466.mp4',0)";
         db.execSQL(insertTest2);
         String insertTest3 = "INSERT INTO VIDEO(NAME,ROUTE,ISLIKED) VALUES('VID_20181026_094403.mp4','/DCIM/Camera/VID_20181026_094403.mp4',0)";
-        db.execSQL(insertTest3);*/
+        db.execSQL(insertTest3);
+        String insertTest4 = "INSERT INTO VIDEO(NAME,ROUTE,ISLIKED) VALUES('1520504659755.mp4','/storage/tencent/MicroMsg/WeiXin/1520504659755.mp4',0)";
+        db.execSQL(insertTest4);
+        String insertTest5 = "INSERT INTO VIDEO(NAME,ROUTE,ISLIKED) VALUES('1520889262466.mp4','/tencent/MicroMsg/WeiXin/1520889262466.mp4',0)";
+        db.execSQL(insertTest5);
+        String insertTest6 = "INSERT INTO VIDEO(NAME,ROUTE,ISLIKED) VALUES('VID_20181026_094403.mp4','/DCIM/Camera/VID_20181026_094403.mp4',0)";
+        db.execSQL(insertTest6);
+        String insertTest7 = "INSERT INTO VIDEO(NAME,ROUTE,ISLIKED) VALUES('VID_20181026_094403.mp4','/DCIM/Camera/VID_20181026_094403.mp4',0)";
+        db.execSQL(insertTest7);
     }
 
     public List<Video> getAllVideos(){

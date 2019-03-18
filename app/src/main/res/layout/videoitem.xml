@@ -7,14 +7,14 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:background="@drawable/corner"
-        android:orientation="horizontal">
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:orientation="horizontal"
+        android:id="@+id/setbg">
 
         <TextView
-            android:layout_width="230dp"
+            android:layout_width="245dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="20dp"
@@ -32,7 +32,7 @@
                 android:src="@android:color/darker_gray"
                 app:allow_random_color="false"
                 app:btn_color="@android:color/darker_gray"
-                app:btn_fill_color="@android:color/holo_green_dark"
+                app:btn_fill_color="#dc143c"
                 app:siShape="@raw/smile" />
 
             <ImageView
