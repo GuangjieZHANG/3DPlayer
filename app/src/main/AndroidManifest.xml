@@ -19,7 +19,9 @@
         <activity android:name=".MainActivity">
         </activity>
 
-        <activity android:name=".VideoPlayerActivity">
+        <activity android:name=".VideoPlayerActivity"
+            android:configChanges="orientation|screenSize|smallestScreenSize|keyboard|keyboardHidden|navigation"
+            android:label="Media/VideoView" >
         </activity>
 
         <activity android:name=".FileExplorerActivity">

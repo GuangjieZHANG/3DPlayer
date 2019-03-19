@@ -4,8 +4,8 @@ android {
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.example.player"
-        minSdkVersion 26
-        targetSdkVersion 28
+        minSdkVersion 18
+        targetSdkVersion 22
         versionCode 1
         versionName "1.0"
         multiDexEnabled true
@@ -26,7 +26,7 @@ dependencies {
     implementation 'com.nightonke:boommenu:2.1.1'
     implementation 'com.sackcentury:shinebutton:0.2.0'
     // https://mvnrepository.com/artifact/com.charonchui.vitamio/vitamio
-    implementation group: 'com.charonchui.vitamio', name: 'vitamio', version: '4.2.2'
+    implementation 'me.neavo:vitamio:4.2.2'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'

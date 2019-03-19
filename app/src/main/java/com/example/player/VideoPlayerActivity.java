@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.media.AudioManager;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
@@ -99,6 +98,7 @@ public class VideoPlayerActivity extends Activity implements MediaPlayer.OnCompl
         requestWindowFeature(Window.FEATURE_NO_TITLE);
 
         if(!LibsChecker.checkVitamioLibs(this)){
+            System.out.println("-----------LibsChecker failed!");
             finish();
             return;
         }
@@ -108,11 +108,7 @@ public class VideoPlayerActivity extends Activity implements MediaPlayer.OnCompl
         route = getIntent().getStringExtra("route");
         name = getIntent().getStringExtra("name");
 
-        System.out.println(" ------------ verify if I am here, route: "+route);
-        System.out.println(" ------------ verify if I am here, name: "+name);
-
         if(TextUtils.isEmpty(route)){
-            System.out.println(" ------route is empty------");
             finish();
             return;
         }
@@ -256,6 +252,7 @@ public class VideoPlayerActivity extends Activity implements MediaPlayer.OnCompl
 
     private void startPlayer(){
         if(videoView != null){
+            System.out.println("Video view start -----------");
             videoView.start();
         }
     }
