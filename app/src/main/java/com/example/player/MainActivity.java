@@ -1,6 +1,7 @@
 package com.example.player;
 
 import android.content.Intent;
+import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -36,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
 
         selectVideo = (Button)findViewById(R.id.select_video);
         videoList = (ListView)findViewById(R.id.videolist);
+        videoList.setDivider(null);
         videoAdapter = new VideoAdapter(MainActivity.this,R.layout.videoitem,videos);
         videoList.setAdapter(videoAdapter);
 
@@ -44,13 +46,14 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Video video = (Video)videoAdapter.getItem(position);
                 //System.out.println("You have clicked video "+video.getId());
-                File dstFile = new File(video.getRoute());
+                File dstFile = new File(Environment.getExternalStorageDirectory().getPath()+video.getRoute());
                 if(dstFile.exists()){
                     Intent intent = new Intent(MainActivity.this,VideoPlayerActivity.class);
                     intent.putExtra("name",video.getName());
                     intent.putExtra("route",video.getRoute());
                     startActivity(intent);
                 }else {
+                    //这里应该弹出一个提示框  本记录不存在  是否要删除
                     System.out.println("This file doesn't exist.");
                 }
             }

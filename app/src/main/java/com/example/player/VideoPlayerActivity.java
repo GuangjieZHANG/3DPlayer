@@ -6,6 +6,7 @@ import android.content.pm.ActivityInfo;
 import android.media.AudioManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
@@ -52,6 +53,7 @@ public class VideoPlayerActivity extends Activity implements MediaPlayer.OnCompl
     private boolean needResume = false;
 
     private class MyGesture extends GestureDetector.SimpleOnGestureListener{
+
         @Override
         public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
             float mOldX = e1.getX(), mOldY = e1.getY();
@@ -106,7 +108,11 @@ public class VideoPlayerActivity extends Activity implements MediaPlayer.OnCompl
         route = getIntent().getStringExtra("route");
         name = getIntent().getStringExtra("name");
 
+        System.out.println(" ------------ verify if I am here, route: "+route);
+        System.out.println(" ------------ verify if I am here, name: "+name);
+
         if(TextUtils.isEmpty(route)){
+            System.out.println(" ------route is empty------");
             finish();
             return;
         }
@@ -120,11 +126,14 @@ public class VideoPlayerActivity extends Activity implements MediaPlayer.OnCompl
         layout_brightness = (LinearLayout) findViewById(R.id.video_brightress_layout);
         brigntness_number = (TextView) findViewById(R.id.video_brightress_number);
 
-        if(route.startsWith("http:")){
+/*        if(route.startsWith("http:")){
             videoView.setVideoURI(Uri.parse(route));
         }else{
-            videoView.setVideoPath(route);
-        }
+            videoView.setVideoPath(Environment.getExternalStorageDirectory().getPath()+route);
+        }*/
+
+        System.out.println(" ----------------set Route is "+Environment.getExternalStorageDirectory().getPath()+route);
+        videoView.setVideoPath(Environment.getExternalStorageDirectory().getPath()+route);
 
         mediaController = new MediaController(this);
         mediaController.setFileName(name);
@@ -135,6 +144,7 @@ public class VideoPlayerActivity extends Activity implements MediaPlayer.OnCompl
         audioManager = (AudioManager)getSystemService(Context.AUDIO_SERVICE);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE);
 
+        System.out.println(" -------Test before start play-------");
         startPlayer();
     }
 
