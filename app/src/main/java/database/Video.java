@@ -5,7 +5,6 @@ public class Video {
     private int id;
     private String name;
     private String route;
-    private int isLiked;
 
     public Video() {
     }
@@ -13,7 +12,6 @@ public class Video {
     public Video(String name, String route, int isLiked) {
         this.name = name;
         this.route = route;
-        this.isLiked = isLiked;
     }
 
     public int getId() {
@@ -40,11 +38,4 @@ public class Video {
         this.route = route;
     }
 
-    public int isLiked() {
-        return isLiked;
-    }
-
-    public void setLiked(int liked) {
-        isLiked = liked;
-    }
 }

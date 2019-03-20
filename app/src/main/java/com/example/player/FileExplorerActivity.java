@@ -17,6 +17,8 @@ import java.io.FilenameFilter;
 import java.util.ArrayList;
 import java.util.List;
 
+import database.SQLiteHelper;
+import database.Video;
 import view.FileExplorerAdapter;
 
 public class FileExplorerActivity extends Activity implements AdapterView.OnItemClickListener{
@@ -25,6 +27,7 @@ public class FileExplorerActivity extends Activity implements AdapterView.OnItem
     private String BASEPATH = "";
     private String CPATH = "";
     private List<String> m_datas;
+    private SQLiteHelper database = SQLiteHelper.getInstance(this);
 
     private ListView m_listview;
     private FileExplorerAdapter m_adapter;
@@ -83,7 +86,6 @@ public class FileExplorerActivity extends Activity implements AdapterView.OnItem
     private List<String> getFileList(String path) {
         Log.i(FileExplorerActivity.class.getSimpleName(),"path:" + path);
         File f = new File(path);
-        // mfiles 是一个空的。。。  不知道为什么呀。。。
         File[] mfiles = f.listFiles(new FilenameFilter() {
             @Override
             public boolean accept(File file, String s) {
@@ -132,7 +134,7 @@ public class FileExplorerActivity extends Activity implements AdapterView.OnItem
             CPATH =  CPATH + File.separator + filename;
         }
 
-        File nextDir = new File(CPATH);
+        final File nextDir = new File(CPATH);
 
         if (nextDir.isDirectory())
         {
@@ -144,18 +146,27 @@ public class FileExplorerActivity extends Activity implements AdapterView.OnItem
         {
             if (isMediaFile(nextDir.getName()))
             {
-                Intent intent = new Intent();
-                intent.putExtra("media_path",nextDir.getAbsolutePath());
-                setResult(20001,intent);
-                finish();
+                System.out.println("====== We arrive at the last media path and the absolute path is "+nextDir.getAbsolutePath());
+                AlertDialog.Builder builder = new AlertDialog.Builder(FileExplorerActivity.this);
+                builder.setMessage("您确定要添加此视频？").setPositiveButton("是的", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Video video = new Video();
+                        video.setName(getNameByPath(nextDir.getAbsolutePath()));
+                        video.setRoute(nextDir.getAbsolutePath());
+                        database.addVideo(video);
+                        Intent intent = new Intent(FileExplorerActivity.this,MainActivity.class);
+                        FileExplorerActivity.this.startActivity(intent);
+                        FileExplorerActivity.this.finish();
+                    }
+                }).setNegativeButton("不",null);
+                builder.show();
             }
             else
             {
                 CPATH = getNextPath(CPATH);
             }
         }
-
-
     }
 
     @Override
@@ -177,6 +188,10 @@ public class FileExplorerActivity extends Activity implements AdapterView.OnItem
             return true;
         }
         return super.onKeyDown(keyCode, event);
+    }
+
+    public String getNameByPath(String path){
+        return path.substring(path.lastIndexOf('/')+1);
     }
 
 }

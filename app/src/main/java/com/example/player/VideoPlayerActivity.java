@@ -128,8 +128,8 @@ public class VideoPlayerActivity extends Activity implements MediaPlayer.OnCompl
             videoView.setVideoPath(Environment.getExternalStorageDirectory().getPath()+route);
         }*/
 
-        System.out.println(" ----------------set Route is "+Environment.getExternalStorageDirectory().getPath()+route);
-        videoView.setVideoPath(Environment.getExternalStorageDirectory().getPath()+route);
+        System.out.println(" ----------------set Route is "+route);
+        videoView.setVideoPath(route);
 
         mediaController = new MediaController(this);
         mediaController.setFileName(name);
@@ -266,4 +266,6 @@ public class VideoPlayerActivity extends Activity implements MediaPlayer.OnCompl
     private boolean isPlaying(){
         return videoView!= null && videoView.isPlaying();
     }
+
+
 }

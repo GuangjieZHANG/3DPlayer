@@ -60,22 +60,21 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         String createTable = "CREATE TABLE VIDEO("+
         "ID INTEGER PRIMARY KEY AUTOINCREMENT ,"+
                 "NAME VARCHAR(50) ,"+
-                "ROUTE VARCHAR(100) ,"+
-                "ISLIKED INTEGER );";
+                "ROUTE VARCHAR(100) );";
         db.execSQL(createTable);
-        String insertTest1 = "INSERT INTO VIDEO(NAME,ROUTE,ISLIKED) VALUES('1520504659755.mp4','/storage/tencent/MicroMsg/WeiXin/1520504659755.mp4',0)";
+        String insertTest1 = "INSERT INTO VIDEO(NAME,ROUTE) VALUES('1520504659755.mp4','/storage/emulated/0/tencent/MicroMsg/WeiXin/1520504659755.mp4')";
         db.execSQL(insertTest1);
-        String insertTest2 = "INSERT INTO VIDEO(NAME,ROUTE,ISLIKED) VALUES('1520889262466.mp4','/tencent/MicroMsg/WeiXin/1520889262466.mp4',0)";
+        String insertTest2 = "INSERT INTO VIDEO(NAME,ROUTE) VALUES('1520889262466.mp4','/storage/emulated/0/tencent/MicroMsg/WeiXin/1520889262466.mp4')";
         db.execSQL(insertTest2);
-        String insertTest3 = "INSERT INTO VIDEO(NAME,ROUTE,ISLIKED) VALUES('VID_20181026_094403.mp4','/DCIM/Camera/VID_20181026_094403.mp4',0)";
+        String insertTest3 = "INSERT INTO VIDEO(NAME,ROUTE) VALUES('VID_20181026_094403.mp4','/storage/emulated/0/DCIM/Camera/VID_20181026_094403.mp4')";
         db.execSQL(insertTest3);
-        String insertTest4 = "INSERT INTO VIDEO(NAME,ROUTE,ISLIKED) VALUES('1520504659755.mp4','/storage/tencent/MicroMsg/WeiXin/1520504659755.mp4',0)";
+        String insertTest4 = "INSERT INTO VIDEO(NAME,ROUTE) VALUES('1520504659755.mp4','/storage/emulated/0/tencent/MicroMsg/WeiXin/1520504659755.mp4')";
         db.execSQL(insertTest4);
-        String insertTest5 = "INSERT INTO VIDEO(NAME,ROUTE,ISLIKED) VALUES('1520889262466.mp4','/tencent/MicroMsg/WeiXin/1520889262466.mp4',0)";
+        String insertTest5 = "INSERT INTO VIDEO(NAME,ROUTE) VALUES('1520889262466.mp4','/storage/emulated/0/tencent/MicroMsg/WeiXin/1520889262466.mp4')";
         db.execSQL(insertTest5);
-        String insertTest6 = "INSERT INTO VIDEO(NAME,ROUTE,ISLIKED) VALUES('VID_20181026_094403.mp4','/DCIM/Camera/VID_20181026_094403.mp4',0)";
+        String insertTest6 = "INSERT INTO VIDEO(NAME,ROUTE) VALUES('VID_20181027_144507.mp4','/storage/emulated/0/DCIM/Camera/VID_20181027_144507.mp4')";
         db.execSQL(insertTest6);
-        String insertTest7 = "INSERT INTO VIDEO(NAME,ROUTE,ISLIKED) VALUES('VID_20181026_094403.mp4','/DCIM/Camera/VID_20181026_094403.mp4',0)";
+        String insertTest7 = "INSERT INTO VIDEO(NAME,ROUTE) VALUES('VID_20181101_105732.mp4','/storage/emulated/0/DCIM/Camera/VID_20181101_105732.mp4')";
         db.execSQL(insertTest7);
     }
 
@@ -88,7 +87,6 @@ public class SQLiteHelper extends SQLiteOpenHelper {
             video.setId(Integer.parseInt(cursor.getString(cursor.getColumnIndex("ID"))));
             video.setName(cursor.getString(cursor.getColumnIndex("NAME")));
             video.setRoute(cursor.getString(cursor.getColumnIndex("ROUTE")));
-            video.setLiked(Integer.parseInt(cursor.getString(cursor.getColumnIndex("ISLIKED"))));
             videos.add(video);
         }
         cursor.close();
@@ -96,18 +94,13 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     }
 
     public void addVideo(Video video){
-        String sql = "INSERT INTO VIDEO(NAME,ROUTE,ISLIKED) VALUES(\'" +
+        String sql = "INSERT INTO VIDEO(NAME,ROUTE) VALUES(\'" +
                 video.getName() + "\',\'" +
-                video.getRoute() + "\'," +
-                video.isLiked() +
+                video.getRoute() + "\'" +
                 ")";
         db.execSQL(sql);
     }
 
-    public void likeVideo(Video video){
-        String sql = "UPDATE VIDEO SET ISLIKED = "+ video.isLiked()+" WHERE ID = "+video.getId();
-        db.execSQL(sql);
-    }
 
     public void deleteVideo(int id){
         String sql = "DELETE FROM VIDEO WHERE ID = " + id;
@@ -119,12 +112,11 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         String sql = "SELECT * FROM VIDEO";
         Cursor cursor = db.rawQuery(sql,null);
         System.out.println("-------------TABLE VIDEO-------------");
-        System.out.println("---- ID | NAME | ROUTE | ISLIKED -----");
+        System.out.println("---- ID | NAME | ROUTE -----");
         while(cursor.moveToNext()){
             System.out.print(cursor.getString(cursor.getColumnIndex("ID"))+"  ");
             System.out.print(cursor.getString(cursor.getColumnIndex("NAME"))+"  ");
             System.out.print(cursor.getString(cursor.getColumnIndex("ROUTE"))+"  ");
-            System.out.print(cursor.getString(cursor.getColumnIndex("ISLIKED"))+"  ");
             System.out.println("   ");
         }
         cursor.close();

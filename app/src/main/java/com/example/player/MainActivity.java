@@ -1,5 +1,7 @@
 package com.example.player;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
@@ -44,16 +46,23 @@ public class MainActivity extends AppCompatActivity {
         videoList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Video video = (Video)videoAdapter.getItem(position);
+               final Video video = (Video)videoAdapter.getItem(position);
                 //System.out.println("You have clicked video "+video.getId());
-                File dstFile = new File(Environment.getExternalStorageDirectory().getPath()+video.getRoute());
+                File dstFile = new File(video.getRoute());
                 if(dstFile.exists()){
                     Intent intent = new Intent(MainActivity.this,VideoPlayerActivity.class);
                     intent.putExtra("name",video.getName());
                     intent.putExtra("route",video.getRoute());
                     startActivity(intent);
                 }else {
-                    //这里应该弹出一个提示框  本记录不存在  是否要删除
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getApplicationContext());
+                    builder.setMessage("本视频不存在，您想要删除此视频吗？").setPositiveButton("是", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            database.deleteVideo(video.getId());
+                        }
+                    }).setNegativeButton("不",null);
+                    builder.show();
                     System.out.println("This file doesn't exist.");
                 }
             }
@@ -62,8 +71,8 @@ public class MainActivity extends AppCompatActivity {
         selectVideo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-           /*     Intent intent = new Intent(MainActivity.this,FileExplorerActivity.class);
-                MainActivity.this.startActivity(intent);*/
+                Intent intent = new Intent(MainActivity.this,FileExplorerActivity.class);
+                MainActivity.this.startActivity(intent);
             }
         });
     }
@@ -73,4 +82,5 @@ public class MainActivity extends AppCompatActivity {
         database.printVideos();
         videos = database.getAllVideos();
     }
+
 }
